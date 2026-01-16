@@ -1,8 +1,3 @@
-Sure! Here’s a joke for you:
+"Why don't scientists trust atoms?"
 
----
-
-**Why don’t skeletons fight each other?**  
-Because they don’t have the guts. 💀😂
-
----
+"Because they make up everything!"
