@@ -1,0 +1,1 @@
+Why did the computer go to the doctor? To get a bit of rest!
