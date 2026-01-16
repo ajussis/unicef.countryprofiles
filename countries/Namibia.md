@@ -1,1 +1,2 @@
-Ahre did the scarcrow refuse to fight an ouctopus? Because it didn't want to get pecked!
+Broccoli stands for what?
+ Because it can't play piano.
