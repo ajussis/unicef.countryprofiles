@@ -1,8 +1,0 @@
-Sure! Here’s one for you:
-
----
-
-**Why did the scarecrow win an award?**  
-Because he was *outstanding in his field!* 🌾😄
-
----
