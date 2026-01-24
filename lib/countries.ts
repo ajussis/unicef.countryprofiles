@@ -1,0 +1,113 @@
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+
+const countriesDirectory = path.join(process.cwd(), 'content/countries')
+
+export interface Country {
+  slug: string
+  name: string
+  title: string
+  description: string
+  content: string
+}
+
+// Map of country names to emoji flags
+const countryFlags: Record<string, string> = {
+  'Benin': '🇧🇯',
+  'Bolivia': '🇧🇴',
+  'Brazil': '🇧🇷',
+  'Chad': '🇹🇩',
+  'Egypt': '🇪🇬',
+  'Ghana': '🇬🇭',
+  'Guinea': '🇬🇳',
+  'India': '🇮🇳',
+  'Kenya': '🇰🇪',
+  'Kyrgyzstan': '🇰🇬',
+  'Malaysia': '🇲🇾',
+  'Namibia': '🇳🇦',
+  'Philippines': '🇵🇭',
+  'Uzbekistan': '🇺🇿',
+  'Zimbabwe': '🇿🇼',
+}
+
+// Map of country names to regions for categorization
+const countryRegions: Record<string, string> = {
+  'Benin': 'West & Central Africa',
+  'Bolivia': 'Latin America',
+  'Brazil': 'Latin America',
+  'Chad': 'West & Central Africa',
+  'Egypt': 'Middle East & North Africa',
+  'Ghana': 'West & Central Africa',
+  'Guinea': 'West & Central Africa',
+  'India': 'South Asia',
+  'Kenya': 'East & Southern Africa',
+  'Kyrgyzstan': 'Central Asia',
+  'Malaysia': 'East Asia & Pacific',
+  'Namibia': 'East & Southern Africa',
+  'Philippines': 'East Asia & Pacific',
+  'Uzbekistan': 'Central Asia',
+  'Zimbabwe': 'East & Southern Africa',
+}
+
+export function getCountryFlag(name: string): string {
+  return countryFlags[name] || '🌍'
+}
+
+export function getCountryRegion(name: string): string {
+  return countryRegions[name] || 'Global'
+}
+
+function extractTitleAndDescription(content: string): { title: string; description: string } {
+  // Extract title from first line (# Country — Title)
+  const titleMatch = content.match(/^#\s+(.+)$/m)
+  const title = titleMatch ? titleMatch[1] : ''
+  
+  // Extract description from second non-empty line
+  const lines = content.split('\n').filter(line => line.trim())
+  const description = lines.length > 1 ? lines[1].trim() : ''
+  
+  return { title, description }
+}
+
+export function getAllCountries(): Country[] {
+  // Ensure directory exists
+  if (!fs.existsSync(countriesDirectory)) {
+    return []
+  }
+  
+  const fileNames = fs.readdirSync(countriesDirectory)
+  
+  const countries = fileNames
+    .filter(fileName => fileName.endsWith('.md'))
+    .map(fileName => {
+      const slug = fileName.replace(/\.md$/, '').toLowerCase()
+      const name = fileName.replace(/\.md$/, '')
+      const fullPath = path.join(countriesDirectory, fileName)
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+      
+      const { content } = matter(fileContents)
+      const { title, description } = extractTitleAndDescription(content)
+      
+      return {
+        slug,
+        name,
+        title,
+        description,
+        content,
+      }
+    })
+    .sort((a, b) => a.name.localeCompare(b.name))
+  
+  return countries
+}
+
+export function getCountryBySlug(slug: string): Country | null {
+  const countries = getAllCountries()
+  return countries.find(country => country.slug === slug) || null
+}
+
+export function getAllCountrySlugs(): string[] {
+  const countries = getAllCountries()
+  return countries.map(country => country.slug)
+}

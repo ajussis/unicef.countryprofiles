@@ -1,0 +1,165 @@
+.markdown {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  line-height: 1.75;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: var(--space-2xl) 0 var(--space-md);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  scroll-margin-top: var(--space-xl);
+}
+
+.h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: var(--space-xl) 0 var(--space-sm);
+  scroll-margin-top: var(--space-xl);
+}
+
+.p {
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+
+.ul,
+.ol {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+.li {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text);
+}
+
+.li::marker {
+  color: var(--color-primary);
+}
+
+/* Checkbox items */
+.li:has(input[type="checkbox"]) {
+  list-style: none;
+  margin-left: calc(-1 * var(--space-lg));
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(0, 174, 239, 0.04);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+  word-break: break-word;
+}
+
+.a:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.hr {
+  border: none;
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--space-xl) 0;
+}
+
+.strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.blockquote {
+  border-left: 4px solid var(--color-primary);
+  padding-left: var(--space-md);
+  margin: var(--space-md) 0;
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+/* Special styling for "What this means" sections */
+.markdown p:has(strong:first-child) {
+  background: linear-gradient(135deg, rgba(0, 174, 239, 0.06) 0%, rgba(0, 212, 170, 0.04) 100%);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-primary);
+  margin: var(--space-md) 0;
+}
+
+/* Sources section styling */
+.markdown p:contains("Sources:"),
+.h3 + .p strong:contains("Sources") {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Tables (for vendor checklist) */
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: 0.9rem;
+}
+
+.markdown th,
+.markdown td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.markdown th {
+  font-weight: 600;
+  background: var(--color-bg);
+}
+
+/* Code/pre for any inline code */
+.markdown code {
+  background: var(--color-bg);
+  padding: 0.1em 0.3em;
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+.markdown pre {
+  background: var(--color-bg-dark);
+  color: white;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin: var(--space-md) 0;
+}
+
+.markdown pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .h2 {
+    font-size: 1.25rem;
+  }
+  
+  .h3 {
+    font-size: 1rem;
+  }
+}
