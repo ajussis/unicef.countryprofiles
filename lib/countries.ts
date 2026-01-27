@@ -37,7 +37,7 @@ const countryRegions: Record<string, string> = {
   'Bolivia': 'Latin America',
   'Brazil': 'Latin America',
   'Chad': 'West & Central Africa',
-  'Egypt': 'Middle East & North Africa',
+  'Egypt': 'North Africa',
   'Ghana': 'West & Central Africa',
   'Guinea': 'West & Central Africa',
   'India': 'South Asia',
@@ -50,12 +50,31 @@ const countryRegions: Record<string, string> = {
   'Zimbabwe': 'East & Southern Africa',
 }
 
+// Map regions to continents
+const regionToContinentMap: Record<string, string> = {
+  'West & Central Africa': 'Africa',
+  'East & Southern Africa': 'Africa',
+  'North Africa': 'Africa',
+  'Latin America': 'Americas',
+  'South Asia': 'Asia',
+  'Central Asia': 'Asia',
+  'East Asia & Pacific': 'Asia & Pacific',
+}
+
+// Continent display order
+export const continentOrder = ['Africa', 'Americas', 'Asia', 'Asia & Pacific', 'Europe']
+
 export function getCountryFlag(name: string): string {
   return countryFlags[name] || '🌍'
 }
 
 export function getCountryRegion(name: string): string {
   return countryRegions[name] || 'Global'
+}
+
+export function getCountryContinent(name: string): string {
+  const region = countryRegions[name]
+  return regionToContinentMap[region] || 'Other'
 }
 
 function extractTitleAndDescription(content: string): { title: string; description: string } {
