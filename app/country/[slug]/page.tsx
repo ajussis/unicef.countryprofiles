@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getAllCountrySlugs, getCountryBySlug, getCountryFlag, getCountryRegion } from '@/lib/countries'
 import MarkdownContent from '@/components/MarkdownContent'
+import Chatbot from '@/components/Chatbot'
 import styles from './page.module.css'
 
 export async function generateStaticParams() {
@@ -128,6 +129,9 @@ export default function CountryPage({ params }: { params: { slug: string } }) {
           </p>
         </div>
       </footer>
+
+      {/* Chatbot */}
+      <Chatbot country={country.name} />
     </main>
   )
 }
