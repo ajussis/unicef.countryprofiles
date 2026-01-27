@@ -23,12 +23,18 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    // Only scroll within the chat container, not the whole page
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
   }
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    // Only scroll when there are messages and not during streaming
+    if (messages.length > 0 && !isLoading) {
+      scrollToBottom()
+    }
+  }, [messages.length, isLoading])
 
   useEffect(() => {
     if ((isOpen || inline) && inputRef.current) {
@@ -71,6 +77,7 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
 
       const decoder = new TextDecoder()
       let buffer = ''
+      let accumulatedAnswer = ''
 
       while (true) {
         const { done, value } = await reader.read()
@@ -91,24 +98,16 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
                 setConversationId(parsed.conversation_id)
               }
 
-              // Handle different event types from Dify
+              // Handle different event types from Dify chat
               if (parsed.event === 'message' || parsed.event === 'agent_message') {
-                // Streaming chunk
-                if (parsed.answer) {
-                  setMessages(prev => {
-                    const newMessages = [...prev]
-                    const lastMessage = newMessages[newMessages.length - 1]
-                    if (lastMessage && lastMessage.role === 'assistant') {
-                      lastMessage.content = parsed.answer
-                    }
-                    return newMessages
-                  })
+                // Accumulate the answer - Dify sends chunks
+                const chunk = parsed.answer || ''
+                if (chunk) {
+                  accumulatedAnswer += chunk
                 }
               } else if (parsed.event === 'message_end') {
                 // Message complete
-                if (parsed.metadata?.usage) {
-                  console.log('Token usage:', parsed.metadata.usage)
-                }
+                console.log('Stream complete, answer length:', accumulatedAnswer.length)
               } else if (parsed.event === 'error') {
                 throw new Error(parsed.message || 'Error from AI')
               }
@@ -118,17 +117,40 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
             }
           }
         }
+        
+        // Update UI with accumulated answer after processing each chunk
+        if (accumulatedAnswer) {
+          const currentAnswer = accumulatedAnswer
+          setMessages(prev => 
+            prev.map((msg, idx) => 
+              idx === prev.length - 1 && msg.role === 'assistant'
+                ? { ...msg, content: currentAnswer }
+                : msg
+            )
+          )
+        }
+      }
+      
+      // Final update to ensure answer is preserved
+      if (accumulatedAnswer) {
+        const finalAnswer = accumulatedAnswer
+        setMessages(prev => 
+          prev.map((msg, idx) => 
+            idx === prev.length - 1 && msg.role === 'assistant'
+              ? { ...msg, content: finalAnswer }
+              : msg
+          )
+        )
       }
     } catch (error) {
       console.error('Chat error:', error)
-      setMessages(prev => {
-        const newMessages = [...prev]
-        const lastMessage = newMessages[newMessages.length - 1]
-        if (lastMessage && lastMessage.role === 'assistant') {
-          lastMessage.content = 'Sorry, I encountered an error. Please try again.'
-        }
-        return newMessages
-      })
+      setMessages(prev => 
+        prev.map((msg, idx) => 
+          idx === prev.length - 1 && msg.role === 'assistant'
+            ? { ...msg, content: 'Sorry, I encountered an error. Please try again.' }
+            : msg
+        )
+      )
     } finally {
       setIsLoading(false)
     }
@@ -142,7 +164,7 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
-          <span>Ask AI Assistant</span>
+          <span>Your Cabinet Advisor</span>
         </div>
 
         <div className={styles.inlineMessages}>

@@ -5,7 +5,7 @@ export const runtime = 'edge'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { query, user, country, conversation_id } = body
+    const { query, user } = body
 
     if (!query) {
       return new Response(JSON.stringify({ error: 'Query is required' }), {
@@ -23,19 +23,15 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Build the request to Dify
+    // Build the request to Dify Chat API
     const difyPayload: Record<string, unknown> = {
       query: query,
-      user: user || 'anonymous',
+      user: user || `user-${Date.now()}`,
       response_mode: 'streaming',
-      inputs: {
-        country: country || '',
-      },
+      inputs: {},
     }
 
-    if (conversation_id) {
-      difyPayload.conversation_id = conversation_id
-    }
+    console.log('Sending to Dify Chat:', JSON.stringify(difyPayload))
 
     const difyResponse = await fetch('https://api.dify.ai/v1/chat-messages', {
       method: 'POST',
@@ -48,8 +44,9 @@ export async function POST(request: NextRequest) {
 
     if (!difyResponse.ok) {
       const errorText = await difyResponse.text()
-      console.error('Dify API error:', errorText)
-      return new Response(JSON.stringify({ error: 'Failed to get response from AI' }), {
+      console.error('Dify API error status:', difyResponse.status)
+      console.error('Dify API error body:', errorText)
+      return new Response(JSON.stringify({ error: `Dify error: ${errorText}` }), {
         status: difyResponse.status,
         headers: { 'Content-Type': 'application/json' },
       })
@@ -71,6 +68,7 @@ export async function POST(request: NextRequest) {
 
             try {
               const parsed = JSON.parse(data)
+              // Pass through all events to the frontend
               controller.enqueue(encoder.encode(`data: ${JSON.stringify(parsed)}\n\n`))
             } catch {
               // Skip invalid JSON
