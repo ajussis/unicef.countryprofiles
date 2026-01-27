@@ -6,7 +6,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--color-primary);
+  background: var(--color-primary, #00aeef);
   color: white;
   border: none;
   cursor: pointer;
@@ -15,7 +15,7 @@
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 174, 239, 0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 .toggleButton:hover {
@@ -35,7 +35,7 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  z-index: 1000;
+  z-index: 9999;
   overflow: hidden;
   animation: slideUp 0.3s ease;
 }
@@ -57,7 +57,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  background: var(--color-primary);
+  background: var(--color-primary, #00aeef);
   color: white;
 }
 
@@ -255,7 +255,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--color-primary);
+  background: var(--color-primary, #00aeef);
   color: white;
   border: none;
   cursor: pointer;
@@ -266,12 +266,112 @@
 }
 
 .sendButton:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+  background: var(--color-primary-dark, #0086b3);
   transform: scale(1.05);
 }
 
 .sendButton:disabled {
   background: var(--color-border);
+  cursor: not-allowed;
+}
+
+/* ==================== */
+/* INLINE MODE STYLES   */
+/* ==================== */
+
+.inlineContainer {
+  background: white;
+  border: 1px solid var(--color-border, #e1e8ed);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.inlineHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--color-primary, #00aeef);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.inlineMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f8fafb;
+  min-height: 120px;
+  max-height: 220px;
+}
+
+.inlineWelcome {
+  font-size: 0.85rem;
+  color: var(--color-text-muted, #5a6c7d);
+  line-height: 1.5;
+}
+
+.inlineWelcome p {
+  margin: 0;
+}
+
+.inlineInputForm {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background: white;
+  border-top: 1px solid var(--color-border, #e1e8ed);
+}
+
+.inlineInput {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border, #e1e8ed);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.inlineInput:focus {
+  border-color: var(--color-primary, #00aeef);
+}
+
+.inlineInput:disabled {
+  background: #f5f5f5;
+}
+
+.inlineSendButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--color-primary, #00aeef);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.inlineSendButton:hover:not(:disabled) {
+  background: var(--color-primary-dark, #0086b3);
+}
+
+.inlineSendButton:disabled {
+  background: var(--color-border, #e1e8ed);
   cursor: not-allowed;
 }
 
@@ -289,5 +389,15 @@
   .toggleButton {
     bottom: 16px;
     right: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .inlineContainer {
+    max-height: 300px;
+  }
+  
+  .inlineMessages {
+    max-height: 150px;
   }
 }

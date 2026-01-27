@@ -78,23 +78,8 @@ export default function CountryPage({ params }: { params: { slug: string } }) {
           
           {/* Sidebar */}
           <aside className={styles.sidebar}>
-            <div className={styles.sidebarCard}>
-              <h3 className={styles.sidebarTitle}>Profile Summary</h3>
-              <ul className={styles.sidebarList}>
-                <li>
-                  <span className={styles.sidebarLabel}>Country</span>
-                  <span className={styles.sidebarValue}>{country.name}</span>
-                </li>
-                <li>
-                  <span className={styles.sidebarLabel}>Region</span>
-                  <span className={styles.sidebarValue}>{region}</span>
-                </li>
-                <li>
-                  <span className={styles.sidebarLabel}>Edition</span>
-                  <span className={styles.sidebarValue}>2024</span>
-                </li>
-              </ul>
-            </div>
+            {/* Inline Chatbot */}
+            <Chatbot country={country.name} inline />
             
             <div className={styles.sidebarCard}>
               <h3 className={styles.sidebarTitle}>Key Sections</h3>
@@ -129,9 +114,6 @@ export default function CountryPage({ params }: { params: { slug: string } }) {
           </p>
         </div>
       </footer>
-
-      {/* Chatbot */}
-      <Chatbot country={country.name} />
     </main>
   )
 }
