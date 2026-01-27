@@ -7,8 +7,3 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
-# Edge Functions
-[[edge_functions]]
-  function = "chat"
-  path = "/api/chat"
