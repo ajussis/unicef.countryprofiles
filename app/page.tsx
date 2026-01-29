@@ -1,6 +1,13 @@
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { getAllCountries, getCountryFlag, getCountryRegion, getCountryContinent, continentOrder } from '@/lib/countries'
 import styles from './page.module.css'
+
+// Dynamic import to avoid SSR issues with Leaflet
+const CountryMap = dynamic(() => import('@/components/CountryMap'), {
+  ssr: false,
+  loading: () => <div style={{ height: '450px', background: '#f0f4f8', borderRadius: '12px', margin: '0 auto', maxWidth: '1200px' }} />
+})
 
 interface CountryData {
   slug: string
@@ -67,6 +74,11 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Map Section */}
+      <section className={styles.mapSection}>
+        <CountryMap />
       </section>
 
       {/* Countries Grid */}
