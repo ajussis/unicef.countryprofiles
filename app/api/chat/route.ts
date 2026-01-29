@@ -5,7 +5,7 @@ export const runtime = 'edge'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { query, user } = body
+    const { query, user, country, region } = body
 
     if (!query) {
       return new Response(JSON.stringify({ error: 'Query is required' }), {
@@ -28,7 +28,10 @@ export async function POST(request: NextRequest) {
       query: query,
       user: user || `user-${Date.now()}`,
       response_mode: 'streaming',
-      inputs: {},
+      inputs: {
+        country: country || '',
+        region: region || '',
+      },
     }
 
     console.log('Sending to Dify Chat:', JSON.stringify(difyPayload))

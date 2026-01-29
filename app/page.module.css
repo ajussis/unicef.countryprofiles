@@ -146,6 +146,24 @@
   opacity: 0.7;
 }
 
+.regionCta {
+  display: inline-block;
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a9cb0;
+  text-decoration: none;
+  border: 1px solid #1a9cb0;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.regionCta:hover {
+  background: #1a9cb0;
+  color: white;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -161,7 +179,7 @@
   background: #ffffff;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  transition: 
+  transition:
     box-shadow var(--transition-base),
     border-color var(--transition-base);
   cursor: pointer;
@@ -205,7 +223,7 @@
 .cardArrow {
   flex-shrink: 0;
   color: var(--color-border);
-  transition: 
+  transition:
     transform var(--transition-base),
     color var(--transition-base);
 }
@@ -236,23 +254,23 @@
   .hero {
     padding: var(--space-xl) var(--space-md) var(--space-lg);
   }
-  
+
   .heroTitle {
     font-size: 2rem;
   }
-  
+
   .heroSubtitle {
     font-size: 1rem;
   }
-  
+
   .stats {
     gap: var(--space-lg);
   }
-  
+
   .statNumber {
     font-size: 1.5rem;
   }
-  
+
   .grid {
     grid-template-columns: 1fr;
   }

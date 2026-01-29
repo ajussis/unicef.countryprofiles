@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { getAllCountries, getCountryFlag, getCountryRegion, getCountryContinent, continentOrder } from '@/lib/countries'
+import { getRegionSlugForRegionName } from '@/lib/regions'
 import styles from './page.module.css'
 
 // Dynamic import to avoid SSR issues with Leaflet
@@ -27,12 +28,12 @@ interface ContinentData {
 
 export default function HomePage() {
   const countries = getAllCountries()
-  
+
   // Group countries by continent, then by region
   const countriesByContinent = countries.reduce((acc, country) => {
     const continent = getCountryContinent(country.name)
     const region = getCountryRegion(country.name)
-    
+
     if (!acc[continent]) {
       acc[continent] = {}
     }
@@ -42,13 +43,13 @@ export default function HomePage() {
     acc[continent][region].push(country)
     return acc
   }, {} as ContinentData)
-  
+
   // Sort continents by defined order
   const sortedContinents = continentOrder.filter(c => countriesByContinent[c])
-  
+
   // Count unique regions
   const uniqueRegions = new Set(countries.map(c => getCountryRegion(c.name)))
-  
+
   return (
     <main className={styles.main}>
       {/* Hero Section */}
@@ -56,7 +57,7 @@ export default function HomePage() {
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>Country Profiles</h1>
           <p className={styles.heroSubtitle}>
-            Comprehensive EdTech suitability and compliance assessments for education systems worldwide. 
+            Comprehensive EdTech suitability and compliance assessments for education systems worldwide.
             Explore regulatory environments, digital policies, and deployment conditions.
           </p>
           <div className={styles.stats}>
@@ -88,7 +89,7 @@ export default function HomePage() {
             const regions = countriesByContinent[continent]
             const sortedRegions = Object.keys(regions).sort()
             const continentCountryCount = Object.values(regions).flat().length
-            
+
             return (
               <div key={continent} className={styles.continentGroup}>
                 <h2 className={styles.continentTitle}>
@@ -97,43 +98,51 @@ export default function HomePage() {
                     {continentCountryCount} {continentCountryCount === 1 ? 'country' : 'countries'}
                   </span>
                 </h2>
-                
-                {sortedRegions.map((region) => (
-                  <div key={region} className={styles.regionGroup}>
-                    <h3 className={styles.regionTitle}>
-                      <span className={styles.regionIcon}>●</span>
-                      {region}
-                      <span className={styles.regionCount}>
-                        {regions[region].length}
-                      </span>
-                    </h3>
-                    <div className={styles.grid}>
-                      {regions[region].map((country, index) => (
-                        <Link 
-                          href={`/country/${country.slug}`} 
-                          key={country.slug}
-                          className={`${styles.card} animate-fade-in stagger-${(index % 15) + 1}`}
-                          style={{ opacity: 0 }}
-                        >
-                          <div className={styles.cardFlag}>
-                            {getCountryFlag(country.name)}
-                          </div>
-                          <div className={styles.cardContent}>
-                            <h3 className={styles.cardTitle}>{country.name}</h3>
-                            <p className={styles.cardDescription}>
-                              EdTech Suitability & Compliance Profile
-                            </p>
-                          </div>
-                          <div className={styles.cardArrow}>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </div>
+
+                {sortedRegions.map((regionName) => {
+                  const regionSlug = getRegionSlugForRegionName(regionName)
+                  return (
+                    <div key={regionName} className={styles.regionGroup}>
+                      <h3 className={styles.regionTitle}>
+                        <span className={styles.regionIcon}>●</span>
+                        {regionName}
+                        <span className={styles.regionCount}>
+                          {regions[regionName].length}
+                        </span>
+                      </h3>
+                      {regionSlug && (
+                        <Link href={`/region/${regionSlug}`} className={styles.regionCta}>
+                          Regional EdTech Profile →
                         </Link>
-                      ))}
+                      )}
+                      <div className={styles.grid}>
+                        {regions[regionName].map((country, index) => (
+                          <Link
+                            href={`/country/${country.slug}`}
+                            key={country.slug}
+                            className={`${styles.card} animate-fade-in stagger-${(index % 15) + 1}`}
+                            style={{ opacity: 0 }}
+                          >
+                            <div className={styles.cardFlag}>
+                              {getCountryFlag(country.name)}
+                            </div>
+                            <div className={styles.cardContent}>
+                              <h3 className={styles.cardTitle}>{country.name}</h3>
+                              <p className={styles.cardDescription}>
+                                EdTech Suitability & Compliance Profile
+                              </p>
+                            </div>
+                            <div className={styles.cardArrow}>
+                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             )
           })}

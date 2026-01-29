@@ -9,11 +9,14 @@ interface Message {
 }
 
 interface ChatbotProps {
-  country: string
+  country?: string
+  region?: string
   inline?: boolean
 }
 
-export default function Chatbot({ country, inline = false }: ChatbotProps) {
+export default function Chatbot({ country = '', region = '', inline = false }: ChatbotProps) {
+  const contextLabel = region || country
+  const isRegion = Boolean(region)
   const [isOpen, setIsOpen] = useState(inline) // Always open if inline
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
@@ -64,6 +67,7 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
           query: userMessage,
           user: `user-${Date.now()}`,
           country: country,
+          region: region,
           conversation_id: conversationId,
         }),
       })
@@ -92,7 +96,7 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
             const data = line.slice(6)
             try {
               const parsed = JSON.parse(data)
-              
+
               // Capture conversation ID for follow-up messages
               if (parsed.conversation_id && !conversationId) {
                 setConversationId(parsed.conversation_id)
@@ -117,12 +121,12 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
             }
           }
         }
-        
+
         // Update UI with accumulated answer after processing each chunk
         if (accumulatedAnswer) {
           const currentAnswer = accumulatedAnswer
-          setMessages(prev => 
-            prev.map((msg, idx) => 
+          setMessages(prev =>
+            prev.map((msg, idx) =>
               idx === prev.length - 1 && msg.role === 'assistant'
                 ? { ...msg, content: currentAnswer }
                 : msg
@@ -130,12 +134,12 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
           )
         }
       }
-      
+
       // Final update to ensure answer is preserved
       if (accumulatedAnswer) {
         const finalAnswer = accumulatedAnswer
-        setMessages(prev => 
-          prev.map((msg, idx) => 
+        setMessages(prev =>
+          prev.map((msg, idx) =>
             idx === prev.length - 1 && msg.role === 'assistant'
               ? { ...msg, content: finalAnswer }
               : msg
@@ -144,8 +148,8 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
       }
     } catch (error) {
       console.error('Chat error:', error)
-      setMessages(prev => 
-        prev.map((msg, idx) => 
+      setMessages(prev =>
+        prev.map((msg, idx) =>
           idx === prev.length - 1 && msg.role === 'assistant'
             ? { ...msg, content: 'Sorry, I encountered an error. Please try again.' }
             : msg
@@ -170,10 +174,14 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
         <div className={styles.inlineMessages}>
           {messages.length === 0 && (
             <div className={styles.inlineWelcome}>
-              <p>Ask questions about <strong>{country}</strong>&apos;s EdTech landscape.</p>
+              <p>
+                {isRegion
+                  ? <>Ask anything about EdTech in <strong>{contextLabel}</strong>.</>
+                  : <>Ask questions about <strong>{contextLabel}</strong>&apos;s EdTech landscape.</>}
+              </p>
             </div>
           )}
-          
+
           {messages.map((message, index) => (
             <div
               key={index}
@@ -272,7 +280,7 @@ export default function Chatbot({ country, inline = false }: ChatbotProps) {
                 </ul>
               </div>
             )}
-            
+
             {messages.map((message, index) => (
               <div
                 key={index}
