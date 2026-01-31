@@ -13,6 +13,18 @@ export const countryMapData: CountryMapData[] = [
     products: []
   },
   {
+    name: 'Botswana',
+    slug: 'botswana',
+    coordinates: [-22.3285, 24.6849],
+    products: []
+  },
+  {
+    name: 'Burkina Faso',
+    slug: 'burkina faso',
+    coordinates: [12.2383, -1.5616],
+    products: []
+  },
+  {
     name: 'Benin',
     slug: 'benin',
     coordinates: [9.3077, 2.3158],
@@ -31,9 +43,21 @@ export const countryMapData: CountryMapData[] = [
     products: ['PhET Interactive Simulations', 'Escribo', 'Árvore', 'Micro:bit', 'Eduten', 'Grapho Game', 'Matific', 'MathLAB', 'TeachersPRO', 'Curious Reader']
   },
   {
+    name: 'Central African Republic',
+    slug: 'central african republic',
+    coordinates: [6.6111, 20.9394],
+    products: []
+  },
+  {
     name: 'Cameroon',
     slug: 'cameroon',
     coordinates: [6.6111, 20.9394],
+    products: []
+  },
+  {
+    name: 'Democratic Republic of the Congo',
+    slug: 'democratic republic of the congo',
+    coordinates: [-4.0383, 21.7587],
     products: []
   },
   {
@@ -43,9 +67,21 @@ export const countryMapData: CountryMapData[] = [
     products: []
   },
   {
+    name: 'Ethiopia',
+    slug: 'ethiopia',
+    coordinates: [9.145, 40.4897],
+    products: []
+  },
+  {
     name: 'Egypt',
     slug: 'egypt',
     coordinates: [26.8206, 30.8025],
+    products: []
+  },
+  {
+    name: 'Gabon',
+    slug: 'gabon',
+    coordinates: [-0.8037, 11.6094],
     products: []
   },
   {
@@ -91,6 +127,12 @@ export const countryMapData: CountryMapData[] = [
     products: []
   },
   {
+    name: 'Mali',
+    slug: 'mali',
+    coordinates: [17.5707, -3.9962],
+    products: []
+  },
+  {
     name: 'Malawi',
     slug: 'malawi',
     coordinates: [-13.2543, 34.3015],
@@ -115,6 +157,12 @@ export const countryMapData: CountryMapData[] = [
     products: []
   },
   {
+    name: 'Niger',
+    slug: 'niger',
+    coordinates: [17.6078, 8.0817],
+    products: []
+  },
+  {
     name: 'Namibia',
     slug: 'namibia',
     coordinates: [-22.9576, 18.4904],
@@ -124,6 +172,12 @@ export const countryMapData: CountryMapData[] = [
     name: 'Nigeria',
     slug: 'nigeria',
     coordinates: [9.082, 8.6753],
+    products: []
+  },
+  {
+    name: 'Rwanda',
+    slug: 'rwanda',
+    coordinates: [-1.9403, 29.8739],
     products: []
   },
   {
@@ -139,9 +193,21 @@ export const countryMapData: CountryMapData[] = [
     products: []
   },
   {
+    name: 'Somalia',
+    slug: 'somalia',
+    coordinates: [5.1521, 46.1996],
+    products: []
+  },
+  {
     name: 'South Africa',
     slug: 'south africa',
     coordinates: [-30.5595, 22.9375],
+    products: []
+  },
+  {
+    name: 'Sudan',
+    slug: 'sudan',
+    coordinates: [12.8628, 30.2176],
     products: []
   },
   {
@@ -160,6 +226,12 @@ export const countryMapData: CountryMapData[] = [
     name: 'Uganda',
     slug: 'uganda',
     coordinates: [1.3733, 32.2903],
+    products: []
+  },
+  {
+    name: 'Western Sahara',
+    slug: 'western sahara',
+    coordinates: [24.2155, -12.8858],
     products: []
   },
   {

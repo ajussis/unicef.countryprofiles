@@ -86,7 +86,7 @@ const eastSouthernAfricaOverview: RegionOverviewContent = {
     ],
   },
   executiveContext:
-    'East and Southern Africa is a mobile-first, reform-driven region where EdTech adoption is accelerating. Governments are increasingly integrating digital learning into national strategies, yet deployment success continues to depend heavily on infrastructure realities and implementation capacity.',
+    'East Africa is a mobile-first, reform-driven region where EdTech adoption is accelerating. Governments are increasingly integrating digital learning into national strategies, yet deployment success continues to depend heavily on infrastructure realities and implementation capacity. Kenya and Rwanda are especially influential signal-setters.',
   educationSystems: {
     content:
       'The region serves over 200 million children and youth, with significant variation in enrollment, learning outcomes, and system capacity. Countries such as Kenya, Rwanda, and Tanzania are advancing curriculum modernization and assessment reforms, creating favorable conditions for structured digital learning tools.',
@@ -131,20 +131,20 @@ const eastSouthernAfricaOverview: RegionOverviewContent = {
   ],
 }
 
-const eastSouthernAfrica: Region = {
-  slug: 'east-southern-africa',
-  name: 'East & Southern Africa',
-  description: 'East and Southern Africa is a diverse region with growing investment in education technology. Countries in the region are expanding digital learning infrastructure and adopting EdTech to improve access and quality of education.',
+const eastAfrica: Region = {
+  slug: 'east-africa',
+  name: 'East Africa',
+  description: 'One of the fastest-moving EdTech zones in Africa. Reform-oriented ministries, strong mobile ecosystems, and active NGO presence. Kenya and Rwanda are especially influential signal-setters. Excellent region for scalable innovation pilots that can become national programs.',
   metrics: {
-    educationSystem: 'Over 200 million children and youth in the region. Significant variation in enrollment and learning outcomes across countries; several countries are reforming curricula and assessment.',
-    technology: 'Mobile-first adoption is dominant. Smartphone penetration growing; low-cost devices and shared access common in schools.',
-    connectivity: 'About 64% high-speed internet coverage, 24% internet usage (2023). World Bank and others investing in broadband; rural-urban and country gaps remain.',
-    edtechDeployment: 'Government-led digital education initiatives in Kenya, Tanzania, Rwanda; NGO and private EdTech pilots scaling. Learning Cabinet tools with major presence include onecourse, EIDU, Maths-Whizz, Angaza Elimu, and others.',
+    educationSystem: 'Reform-oriented ministries advancing competency-based curricula and digital strategies. Significant variation in enrollment and learning outcomes across countries.',
+    technology: 'Strong mobile ecosystems. Smartphone adoption expanding rapidly; shared device models common in schools.',
+    connectivity: 'Coverage expanding but meaningful rural and affordability gaps remain. Offline-capable solutions critical.',
+    edtechDeployment: 'Government-led digital education initiatives in Kenya, Rwanda, Tanzania; NGO and private EdTech pilots scaling. Learning Cabinet tools with major presence include onecourse, EIDU, Maths-Whizz, Angaza Elimu, and others.',
   },
   overview: eastSouthernAfricaOverview,
-  mapCenter: [-6.5, 25],
-  mapZoom: 4,
-  countryNames: ['Kenya', 'Malawi', 'Mozambique', 'Namibia', 'South Africa', 'Tanzania', 'Uganda', 'Zambia', 'Zimbabwe'],
+  mapCenter: [-2, 38],
+  mapZoom: 5,
+  countryNames: ['Ethiopia', 'Kenya', 'Rwanda', 'Somalia', 'Tanzania', 'Uganda'],
   productsActiveInRegion: [
     'onecourse',
     'Maths-Whizz',
@@ -186,16 +186,16 @@ const eastSouthernAfrica: Region = {
 const northAfrica: Region = {
   slug: 'north-africa',
   name: 'North Africa',
-  description: 'North Africa encompasses countries along the Mediterranean coast with diverse education systems and growing digital infrastructure. The region is investing in EdTech to expand access and improve learning outcomes.',
+  description: 'Higher average connectivity and strong government control of education systems. Arabic and French language ecosystems. Often policy-driven procurement. More top-down adoption and fewer fragmented pilots than in Sub-Saharan markets.',
   metrics: {
-    educationSystem: 'Over 60 million children and youth. Strong emphasis on Arabic and French-language education; varying levels of digital integration across countries.',
-    technology: 'Increasing smartphone and laptop adoption. Government initiatives to provide devices in schools; private sector partnerships expanding.',
-    connectivity: 'Higher internet penetration in urban areas; broadband expansion underway. Mobile networks dominant in rural regions.',
-    edtechDeployment: 'Government-led digital education programs; growing EdTech ecosystem with regional and international solutions. Learning Cabinet tools expanding presence.',
+    educationSystem: 'Strong government control of education systems. Strong emphasis on Arabic and French-language education; varying levels of digital integration.',
+    technology: 'Increasing smartphone and laptop adoption. Government initiatives to provide devices in schools.',
+    connectivity: 'Higher average connectivity than Sub-Saharan Africa. Broadband expansion underway.',
+    edtechDeployment: 'Policy-driven procurement. Government-led programs; growing EdTech ecosystem. Learning Cabinet tools expanding presence.',
   },
-  mapCenter: [28, 10],
+  mapCenter: [26, 12],
   mapZoom: 4,
-  countryNames: ['Algeria', 'Egypt', 'Libya', 'Morocco', 'Tunisia'],
+  countryNames: ['Algeria', 'Egypt', 'Libya', 'Morocco', 'Sudan', 'Tunisia', 'Western Sahara'],
   productsActiveInRegion: ['Curious Reader'],
   productsFromRegion: [],
   news: [
@@ -220,19 +220,19 @@ const northAfrica: Region = {
   ],
 }
 
-const westCentralAfrica: Region = {
-  slug: 'west-central-africa',
-  name: 'West & Central Africa',
-  description: 'West and Central Africa is a dynamic region with diverse education systems and rapidly growing mobile connectivity. Countries are scaling digital learning initiatives to reach underserved communities.',
+const westAfrica: Region = {
+  slug: 'west-africa',
+  name: 'West Africa',
+  description: 'Very large student populations. Strong private-school market in some countries. Infrastructure uneven. English and French split. Huge scale potential but operational complexity is high. Nigeria alone can behave like its own region.',
   metrics: {
-    educationSystem: 'Over 150 million children and youth. Significant variation in enrollment; many countries reforming curricula and expanding access to secondary education.',
-    technology: 'Mobile-first; high smartphone growth. Low-cost devices and solar-powered solutions gaining traction for off-grid schools.',
-    connectivity: 'Mobile internet expanding; fiber infrastructure in urban areas. Rural connectivity improving through satellite and community networks.',
-    edtechDeployment: 'NGO and donor-supported pilots; government programs scaling. Learning Cabinet tools including Tangible, Curious Reader, and others active across the region.',
+    educationSystem: 'Very large student populations. Significant variation in enrollment and system capacity across countries.',
+    technology: 'Mobile-first; high smartphone growth. Strong private-school market in some countries.',
+    connectivity: 'Infrastructure uneven. Mobile internet expanding in urban areas.',
+    edtechDeployment: 'NGO and donor-supported pilots; government programs scaling. Learning Cabinet tools including Tangible, Curious Reader active. Nigeria is a major market.',
   },
-  mapCenter: [8, 5],
+  mapCenter: [10, -5],
   mapZoom: 4,
-  countryNames: ['Benin', 'Cameroon', 'Chad', 'Ghana', 'Guinea', 'Ivory Coast', 'Nigeria', 'Senegal'],
+  countryNames: ['Benin', 'Burkina Faso', 'Ghana', 'Guinea', 'Ivory Coast', 'Mali', 'Niger', 'Nigeria', 'Senegal'],
   productsActiveInRegion: ['Tangible', 'Curious Reader'],
   productsFromRegion: [],
   news: [
@@ -257,7 +257,81 @@ const westCentralAfrica: Region = {
   ],
 }
 
-const regionsData: Region[] = [eastSouthernAfrica, northAfrica, westCentralAfrica]
+const centralAfrica: Region = {
+  slug: 'central-africa',
+  name: 'Central Africa',
+  description: 'Lower connectivity. More fragile systems in several countries. Harder procurement environments. Often donor-driven deployments rather than government-funded scale. Many global platforms under-invest here — which creates whitespace but also risk.',
+  metrics: {
+    educationSystem: 'More fragile systems in several countries. Significant variation in enrollment and capacity.',
+    technology: 'Lower connectivity. Mobile-first where connectivity exists.',
+    connectivity: 'Lower connectivity than other African regions. Infrastructure gaps.',
+    edtechDeployment: 'Often donor-driven deployments. Government-funded scale limited. Important product note: whitespace but also risk for under-invested markets.',
+  },
+  mapCenter: [2, 20],
+  mapZoom: 4,
+  countryNames: ['Cameroon', 'Central African Republic', 'Chad', 'Democratic Republic of the Congo', 'Gabon'],
+  productsActiveInRegion: ['Curious Reader'],
+  productsFromRegion: [],
+  news: [
+    {
+      title: 'EdTech in Central Africa: bridging the digital divide',
+      url: 'https://www.worldbank.org/',
+      source: 'World Bank',
+      date: '2024',
+    },
+    {
+      title: 'UNESCO supports education in fragile contexts',
+      url: 'https://www.unesco.org/',
+      source: 'UNESCO',
+      date: '2024',
+    },
+    {
+      title: 'Donor-driven EdTech in Central Africa',
+      url: 'https://www.unicef.org/',
+      source: 'UNICEF',
+      date: '2023',
+    },
+  ],
+}
+
+const southernAfrica: Region = {
+  slug: 'southern-africa',
+  name: 'Southern Africa',
+  description: 'South Africa acts as a regional anchor. Better infrastructure in several countries. More mature vendor ecosystems. Closer to middle-income market dynamics in parts — procurement expectations can be higher.',
+  metrics: {
+    educationSystem: 'South Africa anchors the region. Significant variation in enrollment; several countries with stronger infrastructure.',
+    technology: 'More mature vendor ecosystems. Better infrastructure in several countries.',
+    connectivity: 'Better connectivity than many Sub-Saharan regions. Urban-rural gaps remain.',
+    edtechDeployment: 'Higher procurement expectations in parts. Learning Cabinet tools including MathLAB, Curious Reader active. Mozambique, Zimbabwe scaling.',
+  },
+  mapCenter: [-20, 25],
+  mapZoom: 4,
+  countryNames: ['Botswana', 'Malawi', 'Mozambique', 'Namibia', 'South Africa', 'Zambia', 'Zimbabwe'],
+  productsActiveInRegion: ['MathLAB', 'Curious Reader'],
+  productsFromRegion: [],
+  news: [
+    {
+      title: 'South Africa leads EdTech innovation in Southern Africa',
+      url: 'https://www.worldbank.org/',
+      source: 'World Bank',
+      date: '2024',
+    },
+    {
+      title: 'Digital learning in Mozambique and Zimbabwe',
+      url: 'https://www.unesco.org/',
+      source: 'UNESCO',
+      date: '2024',
+    },
+    {
+      title: 'Regional EdTech ecosystems mature in Southern Africa',
+      url: 'https://techreviewafrica.com/',
+      source: 'Tech Review Africa',
+      date: '2024',
+    },
+  ],
+}
+
+const regionsData: Region[] = [northAfrica, westAfrica, centralAfrica, eastAfrica, southernAfrica]
 
 export function getRegionBySlug(slug: string): Region | null {
   return regionsData.find((r) => r.slug === slug) ?? null

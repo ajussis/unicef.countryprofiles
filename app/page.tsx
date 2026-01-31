@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { getAllCountries, getCountryFlag, getCountryRegion, getCountryContinent, continentOrder } from '@/lib/countries'
+import { getAllCountries, getCountryFlag, getCountryRegion, getCountryContinent, continentOrder, africaRegionOrder } from '@/lib/countries'
 import { getRegionSlugForRegionName } from '@/lib/regions'
 import styles from './page.module.css'
 
@@ -70,7 +70,10 @@ export default function HomePage() {
         <div className={styles.container}>
           {sortedContinents.map((continent) => {
             const regions = countriesByContinent[continent]
-            const sortedRegions = Object.keys(regions).sort()
+            const sortedRegions =
+              continent === 'Africa'
+                ? africaRegionOrder.filter((r) => regions[r])
+                : Object.keys(regions).sort()
             const continentCountryCount = Object.values(regions).flat().length
 
             return (
