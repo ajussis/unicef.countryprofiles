@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { countryMapData } from '@/lib/countryMapData'
+import { getProductUrl } from '@/lib/productCatalog'
 import styles from './CountryMap.module.css'
 
 // Dynamic import for Leaflet to avoid SSR issues
@@ -50,7 +51,7 @@ export default function CountryMap() {
                         {country.products.slice(0, 5).map((product, idx) => (
                           <li key={idx}>
                             <a
-                              href={`https://www.learningcabinet.org/search/edtech-tools/?search=${encodeURIComponent(product)}`}
+                              href={getProductUrl(product)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className={styles.productLink}

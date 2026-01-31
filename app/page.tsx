@@ -52,10 +52,9 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>EdTech Country Profiles</h1>
+          <h1 className={styles.heroTitle}>Global South EdTech Intelligence</h1>
           <p className={styles.heroSubtitle}>
-            Comprehensive EdTech suitability and compliance assessments for education systems worldwide.
-            Explore regulatory environments, digital policies, and deployment conditions.
+            Strategic insights into education technology markets, policy environments, and system readiness across emerging economies.
           </p>
         </div>
       </section>

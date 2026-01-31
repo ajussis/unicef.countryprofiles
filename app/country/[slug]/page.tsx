@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { getAllCountrySlugs, getCountryBySlug, getCountryFlag, getCountryRegion } from '@/lib/countries'
 import MarkdownContent from '@/components/MarkdownContent'
 import Chatbot from '@/components/Chatbot'
+import RegionsCountriesNav from '@/components/RegionsCountriesNav'
 import styles from './page.module.css'
 
 export async function generateStaticParams() {
@@ -12,13 +13,13 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const country = getCountryBySlug(params.slug)
-  
+
   if (!country) {
     return {
       title: 'Country Not Found',
     }
   }
-  
+
   return {
     title: `${country.name} - EdTech Profile | UNICEF Country Profiles`,
     description: `EdTech suitability and compliance profile for ${country.name}. ${country.description}`,
@@ -27,14 +28,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default function CountryPage({ params }: { params: { slug: string } }) {
   const country = getCountryBySlug(params.slug)
-  
+
   if (!country) {
     notFound()
   }
-  
+
   const flag = getCountryFlag(country.name)
   const region = getCountryRegion(country.name)
-  
+
   return (
     <main className={styles.main}>
       {/* Header */}
@@ -45,11 +46,11 @@ export default function CountryPage({ params }: { params: { slug: string } }) {
         <div className={styles.headerContent}>
           <Link href="/" className={styles.backLink}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M16 10H4M4 10L9 5M4 10L9 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M16 10H4M4 10L9 5M4 10L9 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span>All Countries</span>
           </Link>
-          
+
           <div className={styles.heroInfo}>
             <span className={styles.flag}>{flag}</span>
             <div className={styles.heroText}>
@@ -58,7 +59,7 @@ export default function CountryPage({ params }: { params: { slug: string } }) {
               <p className={styles.subtitle}>EdTech Suitability & Compliance Profile</p>
             </div>
           </div>
-          
+
           <div className={styles.quickNav}>
             <span className={styles.quickNavLabel}>Jump to:</span>
             <a href="#education-system" className={styles.quickNavLink}>Education System</a>
@@ -75,12 +76,12 @@ export default function CountryPage({ params }: { params: { slug: string } }) {
           <div className={styles.content}>
             <MarkdownContent content={country.content} />
           </div>
-          
+
           {/* Sidebar */}
           <aside className={styles.sidebar}>
             {/* Inline Chatbot */}
             <Chatbot country={country.name} inline />
-            
+
             <div className={styles.sidebarCard}>
               <h3 className={styles.sidebarTitle}>Key Sections</h3>
               <nav className={styles.tocNav}>
@@ -102,6 +103,8 @@ export default function CountryPage({ params }: { params: { slug: string } }) {
           </aside>
         </div>
       </article>
+
+      <RegionsCountriesNav excludeCountry={country.slug} />
 
       {/* Footer */}
       <footer className={styles.footer}>

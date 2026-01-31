@@ -1,0 +1,121 @@
+.regionsCountriesNav {
+  padding: var(--space-3xl) var(--space-xl);
+  background: #f8fafc;
+  border-top: 1px solid var(--color-border);
+}
+
+.navInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-2xl);
+  letter-spacing: -0.02em;
+}
+
+.navColumns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3xl);
+}
+
+.navColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.navBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.navRegionLink {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  line-height: 1.3;
+}
+
+.navRegionLink:hover {
+  color: var(--color-primary-dark);
+}
+
+.navContinentLabel {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+}
+
+.navCountryList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.navCountryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  text-decoration: none;
+  padding: var(--space-xs) 0;
+  transition: color var(--transition-fast);
+  line-height: 1.4;
+  border-radius: 4px;
+}
+
+.navCountryLink:hover {
+  color: var(--color-primary);
+}
+
+.navFlag {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .regionsCountriesNav {
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  .navColumns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  .navColumn {
+    gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 600px) {
+  .regionsCountriesNav {
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  .navColumns {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .navColumn {
+    gap: var(--space-xl);
+  }
+
+  .navTitle {
+    margin-bottom: var(--space-xl);
+  }
+}

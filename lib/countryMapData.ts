@@ -70,7 +70,7 @@ export const countryMapData: CountryMapData[] = [
     name: 'Ethiopia',
     slug: 'ethiopia',
     coordinates: [9.145, 40.4897],
-    products: []
+    products: ['Curious Reader']
   },
   {
     name: 'Egypt',
@@ -112,7 +112,7 @@ export const countryMapData: CountryMapData[] = [
     name: 'Kenya',
     slug: 'kenya',
     coordinates: [-0.0236, 37.9062],
-    products: ['onecourse', 'Maths-Whizz', 'Tangible', 'BookSmart', 'EIDU', 'NABU\'s multilingual web reader', 'Angaza Elimu']
+    products: ['onecourse', 'Maths-Whizz', 'Tangible', 'BookSmart', 'EIDU', "NABU's multilingual web reader and mobile app", 'Angaza Elimu']
   },
   {
     name: 'Kyrgyzstan',
@@ -136,7 +136,7 @@ export const countryMapData: CountryMapData[] = [
     name: 'Malawi',
     slug: 'malawi',
     coordinates: [-13.2543, 34.3015],
-    products: []
+    products: ['onecourse']
   },
   {
     name: 'Malaysia',
@@ -172,19 +172,19 @@ export const countryMapData: CountryMapData[] = [
     name: 'Nigeria',
     slug: 'nigeria',
     coordinates: [9.082, 8.6753],
-    products: []
+    products: ["NABU's multilingual web reader and mobile app", "Amira Reading Suite"]
   },
   {
     name: 'Rwanda',
     slug: 'rwanda',
     coordinates: [-1.9403, 29.8739],
-    products: []
+    products: ["NABU's multilingual web reader and mobile app"]
   },
   {
     name: 'Philippines',
     slug: 'philippines',
     coordinates: [12.8797, 121.7740],
-    products: ['NABU\'s multilingual web reader']
+    products: ["NABU's multilingual web reader and mobile app"]
   },
   {
     name: 'Senegal',
@@ -202,7 +202,7 @@ export const countryMapData: CountryMapData[] = [
     name: 'South Africa',
     slug: 'south africa',
     coordinates: [-30.5595, 22.9375],
-    products: []
+    products: ['Reading Eggs', 'Micro:bit', 'Eduten', 'Matific', 'BookSmart', "NABU's multilingual web reader and mobile app", 'Tangible', 'Curious Reader', 'onecourse']
   },
   {
     name: 'Sudan',
@@ -226,7 +226,7 @@ export const countryMapData: CountryMapData[] = [
     name: 'Uganda',
     slug: 'uganda',
     coordinates: [1.3733, 32.2903],
-    products: []
+    products: ['Tangible']
   },
   {
     name: 'Western Sahara',
@@ -244,7 +244,7 @@ export const countryMapData: CountryMapData[] = [
     name: 'Zambia',
     slug: 'zambia',
     coordinates: [-13.1339, 27.8493],
-    products: []
+    products: ['Tangible']
   },
   {
     name: 'Zimbabwe',

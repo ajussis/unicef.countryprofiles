@@ -151,15 +151,12 @@ const eastAfrica: Region = {
     'Tangible',
     'BookSmart',
     'EIDU',
-    "NABU's multilingual web reader",
-    'Angaza Elimu',
-    'MathLAB',
+    "NABU's multilingual web reader and mobile app",
     'Curious Reader',
+    'Angaza Elimu',
   ],
   productsFromRegion: [
-    { name: 'Angaza Elimu', headquarters: 'Kenya' },
-    { name: 'EIDU', headquarters: 'Kenya' },
-    { name: 'onecourse', headquarters: 'Kenya' },
+    { name: 'Angaza Elimu', headquarters: 'Nairobi, Kenya' },
   ],
   news: [
     {
@@ -196,7 +193,7 @@ const northAfrica: Region = {
   mapCenter: [26, 12],
   mapZoom: 4,
   countryNames: ['Algeria', 'Egypt', 'Libya', 'Morocco', 'Sudan', 'Tunisia', 'Western Sahara'],
-  productsActiveInRegion: ['Curious Reader'],
+  productsActiveInRegion: [],
   productsFromRegion: [],
   news: [
     {
@@ -233,7 +230,7 @@ const westAfrica: Region = {
   mapCenter: [10, -5],
   mapZoom: 4,
   countryNames: ['Benin', 'Burkina Faso', 'Ghana', 'Guinea', 'Ivory Coast', 'Mali', 'Niger', 'Nigeria', 'Senegal'],
-  productsActiveInRegion: ['Tangible', 'Curious Reader'],
+  productsActiveInRegion: ['Tangible', "NABU's multilingual web reader and mobile app", "Amira Reading Suite", 'Curious Reader'],
   productsFromRegion: [],
   news: [
     {
@@ -270,7 +267,7 @@ const centralAfrica: Region = {
   mapCenter: [2, 20],
   mapZoom: 4,
   countryNames: ['Cameroon', 'Central African Republic', 'Chad', 'Democratic Republic of the Congo', 'Gabon'],
-  productsActiveInRegion: ['Curious Reader'],
+  productsActiveInRegion: [],
   productsFromRegion: [],
   news: [
     {
@@ -307,7 +304,18 @@ const southernAfrica: Region = {
   mapCenter: [-20, 25],
   mapZoom: 4,
   countryNames: ['Botswana', 'Malawi', 'Mozambique', 'Namibia', 'South Africa', 'Zambia', 'Zimbabwe'],
-  productsActiveInRegion: ['MathLAB', 'Curious Reader'],
+  productsActiveInRegion: [
+    'Reading Eggs',
+    'Micro:bit',
+    'Eduten',
+    'Matific',
+    'BookSmart',
+    "NABU's multilingual web reader and mobile app",
+    'Tangible',
+    'MathLAB',
+    'Curious Reader',
+    'onecourse',
+  ],
   productsFromRegion: [],
   news: [
     {

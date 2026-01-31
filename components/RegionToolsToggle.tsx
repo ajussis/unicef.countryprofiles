@@ -3,14 +3,39 @@
 import { useState } from 'react'
 import type { ProductFromRegion } from '@/lib/regions'
 import type { ProductActiveInRegion } from '@/lib/regions'
+import { getProductUrl, getProductLogo } from '@/lib/productCatalog'
 
 interface RegionToolsToggleProps {
   productsFromRegion: ProductFromRegion[]
   productsActiveInRegion: ProductActiveInRegion[]
 }
 
-function ToolIcon({ name }: { name: string }) {
+function ToolLogo({ name }: { name: string }) {
+  const logo = getProductLogo(name)
   const initial = name.charAt(0).toUpperCase()
+
+  if (logo) {
+    return (
+      <div className="region-tool-icon region-tool-icon-img">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={logo}
+          alt=""
+          width={48}
+          height={48}
+          onError={(e) => {
+            e.currentTarget.style.display = 'none'
+            const fallback = e.currentTarget.nextElementSibling
+            if (fallback) (fallback as HTMLElement).style.display = 'flex'
+          }}
+        />
+        <span className="region-tool-icon-fallback" style={{ display: 'none' }}>
+          {initial}
+        </span>
+      </div>
+    )
+  }
+
   return (
     <div className="region-tool-icon">
       <span>{initial}</span>
@@ -23,8 +48,6 @@ export default function RegionToolsToggle({
   productsActiveInRegion,
 }: RegionToolsToggleProps) {
   const [activeTab, setActiveTab] = useState<'from' | 'active'>('from')
-
-  const baseUrl = 'https://www.learningcabinet.org/search/edtech-tools/?search='
 
   return (
     <div className="region-tools-toggle">
@@ -54,12 +77,12 @@ export default function RegionToolsToggle({
               productsFromRegion.map((item, idx) => (
                 <a
                   key={idx}
-                  href={`${baseUrl}${encodeURIComponent(item.name)}`}
+                  href={getProductUrl(item.name)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="region-tool-card region-tool-card-from"
                 >
-                  <ToolIcon name={item.name} />
+                  <ToolLogo name={item.name} />
                   <div className="region-tool-card-body">
                     <span className="region-tool-name">{item.name}</span>
                     <span className="region-tool-meta">{item.headquarters}</span>
@@ -82,12 +105,12 @@ export default function RegionToolsToggle({
             {productsActiveInRegion.map((item, idx) => (
               <a
                 key={idx}
-                href={`${baseUrl}${encodeURIComponent(item.name)}`}
+                href={getProductUrl(item.name)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="region-tool-card region-tool-card-active"
               >
-                <ToolIcon name={item.name} />
+                <ToolLogo name={item.name} />
                 <div className="region-tool-card-body">
                   <span className="region-tool-name">{item.name}</span>
                   <span className="region-tool-countries">

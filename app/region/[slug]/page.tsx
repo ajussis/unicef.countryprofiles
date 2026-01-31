@@ -6,6 +6,7 @@ import { getAllCountries, getCountryFlag } from '@/lib/countries'
 import Chatbot from '@/components/Chatbot'
 import RegionToolsToggle from '@/components/RegionToolsToggle'
 import RegionOverview from '@/components/RegionOverview'
+import RegionsCountriesNav from '@/components/RegionsCountriesNav'
 import styles from './page.module.css'
 
 const RegionMap = dynamic(() => import('@/components/RegionMap'), { ssr: false })
@@ -175,6 +176,8 @@ export default function RegionPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </section>
+
+      <RegionsCountriesNav excludeRegion={region.name} />
 
       <footer className={styles.footer}>
         <div className={styles.sectionContainer}>

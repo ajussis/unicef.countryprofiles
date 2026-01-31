@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import type { CountryMapData } from '@/lib/countryMapData'
+import { getProductUrl } from '@/lib/productCatalog'
 import styles from './CountryMap.module.css'
 
 interface RegionMapProps {
@@ -59,7 +60,7 @@ export default function RegionMap({ center, zoom, markers, title, subtitle, mapH
                         {country.products.slice(0, 5).map((product, idx) => (
                           <li key={idx}>
                             <a
-                              href={`https://www.learningcabinet.org/search/edtech-tools/?search=${encodeURIComponent(product)}`}
+                              href={getProductUrl(product)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className={styles.productLink}
