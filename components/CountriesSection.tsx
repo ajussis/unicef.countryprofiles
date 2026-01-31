@@ -104,7 +104,9 @@ export default function CountriesSection({
                       >
                         <span className={styles.regionIcon}>●</span>
                         <span className={styles.regionTitleText}>{regionName}</span>
-                        <span className={styles.regionCount}>{regions[regionName].length}</span>
+                        <span className={styles.regionCount}>
+                          {regions[regionName].length} {regions[regionName].length === 1 ? 'country' : 'countries'}
+                        </span>
                         <span className={styles.toggleIcon} aria-hidden>
                           {isRegionExpanded ? '−' : '+'}
                         </span>
