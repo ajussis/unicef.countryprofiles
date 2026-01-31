@@ -29,9 +29,11 @@ export default function RegionPage({ params }: { params: { slug: string } }) {
   if (!region) notFound()
 
   const regionMapMarkers = getRegionMapData(region)
-  const countriesInRegion = getAllCountries().filter((c) =>
-    region.countryNames.includes(c.name)
-  )
+  const allCountries = getAllCountries()
+  const countriesInRegion = region.countryNames.flatMap((name) => {
+    const c = allCountries.find((x) => x.name === name)
+    return c ? [c] : []
+  })
 
   return (
     <main className={styles.main}>
@@ -46,6 +48,18 @@ export default function RegionPage({ params }: { params: { slug: string } }) {
           </Link>
           <h1 className={styles.title}>{region.name}</h1>
           <p className={styles.subtitle}>Regional EdTech Profile</p>
+          <div className={styles.countriesRow}>
+            {countriesInRegion.map((country) => (
+              <Link
+                key={country.slug}
+                href={`/country/${country.slug}`}
+                className={styles.countryPill}
+              >
+                <span className={styles.countryFlag}>{getCountryFlag(country.name)}</span>
+                <span>{country.name}</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </header>
 

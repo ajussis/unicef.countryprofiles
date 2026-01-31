@@ -14,11 +14,13 @@ function ToggleSection({
   title,
   children,
   defaultOpen = false,
+  boxed = false,
 }: {
   id: string
   title: string
   children: React.ReactNode
   defaultOpen?: boolean
+  boxed?: boolean
 }) {
   const [open, setOpen] = useState(defaultOpen)
   return (
@@ -36,7 +38,10 @@ function ToggleSection({
         </span>
       </button>
       {open && (
-        <div id={id} className={styles.toggleContent}>
+        <div
+          id={id}
+          className={`${styles.toggleContent} ${boxed ? styles.toggleContentBoxed : ''}`}
+        >
           {children}
         </div>
       )}
@@ -112,12 +117,14 @@ export default function RegionOverview({ overview }: { overview: RegionOverviewC
     <div className={styles.root}>
       <h2 className={styles.mainTitle}>Regional Overview</h2>
 
-      <ToggleSection id="decision-snapshot" title="Regional Decision Snapshot" defaultOpen>
-        <DecisionSnapshotBlock snapshot={overview.decisionSnapshot} />
-      </ToggleSection>
-
-      <ToggleSection id="executive-context" title="Executive Context" defaultOpen>
+      {/* Executive Context first */}
+      <div className={styles.executiveContext}>
         <p className={styles.sectionContent}>{overview.executiveContext}</p>
+      </div>
+
+      {/* Highlights in a toggle box */}
+      <ToggleSection id="highlights" title="Key highlights" defaultOpen={false} boxed>
+        <DecisionSnapshotBlock snapshot={overview.decisionSnapshot} />
       </ToggleSection>
 
       <ToggleSection id="education-systems" title="Education Systems">

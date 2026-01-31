@@ -291,7 +291,8 @@
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  max-height: 680px;
+  max-height: 1700px;
+  min-height: 680px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
@@ -318,8 +319,8 @@
   flex-direction: column;
   gap: 12px;
   background: #f8fafb;
-  min-height: 200px;
-  max-height: 480px;
+  min-height: 480px;
+  max-height: 1200px;
 }
 
 .inlineWelcome {
@@ -401,10 +402,12 @@
 
 @media (max-width: 900px) {
   .inlineContainer {
-    max-height: 300px;
+    max-height: 750px;
+    min-height: 400px;
   }
 
   .inlineMessages {
-    max-height: 150px;
+    max-height: 500px;
+    min-height: 300px;
   }
 }

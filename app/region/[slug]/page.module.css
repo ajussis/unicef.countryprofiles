@@ -35,12 +35,44 @@
   font-weight: 700;
   color: var(--color-text);
   line-height: 1.1;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .subtitle {
-  font-size: 1rem;
+  font-size: 0.875rem;
   color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.countriesRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.countryPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #f0f4f8;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.countryPill:hover {
+  background: #e8eef4;
+  border-color: var(--color-primary);
+}
+
+.countryFlag {
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
 /* Hero: Info block + Advisor */
