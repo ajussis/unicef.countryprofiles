@@ -1,10 +1,21 @@
 'use client'
 
 import { useState } from 'react'
+import type { ProductFromRegion } from '@/lib/regions'
+import type { ProductActiveInRegion } from '@/lib/regions'
 
 interface RegionToolsToggleProps {
-  productsFromRegion: string[]
-  productsActiveInRegion: string[]
+  productsFromRegion: ProductFromRegion[]
+  productsActiveInRegion: ProductActiveInRegion[]
+}
+
+function ToolIcon({ name }: { name: string }) {
+  const initial = name.charAt(0).toUpperCase()
+  return (
+    <div className="region-tool-icon">
+      <span>{initial}</span>
+    </div>
+  )
 }
 
 export default function RegionToolsToggle({
@@ -40,16 +51,20 @@ export default function RegionToolsToggle({
           </p>
           <div className="region-tool-cards">
             {productsFromRegion.length > 0 ? (
-              productsFromRegion.map((name, idx) => (
+              productsFromRegion.map((item, idx) => (
                 <a
                   key={idx}
-                  href={`${baseUrl}${encodeURIComponent(name)}`}
+                  href={`${baseUrl}${encodeURIComponent(item.name)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="region-tool-card"
+                  className="region-tool-card region-tool-card-from"
                 >
-                  <span className="region-tool-name">{name}</span>
-                  <span className="region-tool-badge from">From region</span>
+                  <ToolIcon name={item.name} />
+                  <div className="region-tool-card-body">
+                    <span className="region-tool-name">{item.name}</span>
+                    <span className="region-tool-meta">{item.headquarters}</span>
+                  </div>
+                  <span className="region-tool-arrow">→</span>
                 </a>
               ))
             ) : (
@@ -64,16 +79,22 @@ export default function RegionToolsToggle({
             EdTech products with major operations or a majority of active users in this region.
           </p>
           <div className="region-tool-cards">
-            {productsActiveInRegion.map((name, idx) => (
+            {productsActiveInRegion.map((item, idx) => (
               <a
                 key={idx}
-                href={`${baseUrl}${encodeURIComponent(name)}`}
+                href={`${baseUrl}${encodeURIComponent(item.name)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="region-tool-card"
+                className="region-tool-card region-tool-card-active"
               >
-                <span className="region-tool-name">{name}</span>
-                <span className="region-tool-badge active">Active here</span>
+                <ToolIcon name={item.name} />
+                <div className="region-tool-card-body">
+                  <span className="region-tool-name">{item.name}</span>
+                  <span className="region-tool-countries">
+                    {item.countries.join(', ')}
+                  </span>
+                </div>
+                <span className="region-tool-arrow">→</span>
               </a>
             ))}
           </div>

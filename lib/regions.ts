@@ -7,6 +7,11 @@ export interface RegionMetrics {
   edtechDeployment?: string
 }
 
+export interface ProductFromRegion {
+  name: string
+  headquarters: string
+}
+
 export interface Region {
   slug: string
   name: string
@@ -15,11 +20,17 @@ export interface Region {
   mapCenter: [number, number]
   mapZoom: number
   countryNames: string[]
-  /** Product names with major operations / majority of users in this region (from Learning Cabinet data) */
+  /** Product names with major operations / majority of users in this region */
   productsActiveInRegion: string[]
-  /** Product names headquartered or originating from this region */
-  productsFromRegion: string[]
+  /** Products headquartered or originating from this region */
+  productsFromRegion: ProductFromRegion[]
   news: Array<{ title: string; url: string; source: string; date: string }>
+}
+
+/** For "Active in region" tab: product name + list of countries in this region where it's active */
+export interface ProductActiveInRegion {
+  name: string
+  countries: string[]
 }
 
 const eastSouthernAfrica: Region = {
@@ -47,9 +58,9 @@ const eastSouthernAfrica: Region = {
     'Curious Reader',
   ],
   productsFromRegion: [
-    'Angaza Elimu',
-    'EIDU',
-    'onecourse',
+    { name: 'Angaza Elimu', headquarters: 'Kenya' },
+    { name: 'EIDU', headquarters: 'Kenya' },
+    { name: 'onecourse', headquarters: 'Kenya' },
   ],
   news: [
     {
@@ -93,4 +104,21 @@ export function getRegionSlugForRegionName(regionName: string): string | null {
 /** Get map data for countries in a region */
 export function getRegionMapData(region: Region) {
   return countryMapData.filter((c) => region.countryNames.includes(c.name))
+}
+
+/** Get products active in region with the list of countries (in this region) where each is active */
+export function getProductsActiveInRegionWithCountries(region: Region): ProductActiveInRegion[] {
+  const result: ProductActiveInRegion[] = []
+  const seen = new Set<string>()
+  for (const productName of region.productsActiveInRegion) {
+    if (seen.has(productName)) continue
+    seen.add(productName)
+    const countries = countryMapData
+      .filter((c) => region.countryNames.includes(c.name) && c.products.includes(productName))
+      .map((c) => c.name)
+    if (countries.length > 0) {
+      result.push({ name: productName, countries })
+    }
+  }
+  return result
 }

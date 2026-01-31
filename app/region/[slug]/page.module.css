@@ -49,14 +49,22 @@
   background: #fafbfc;
 }
 
-.container {
+/* Hero: two-column grid (info + advisor) */
+.heroGrid {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 var(--space-lg);
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1fr 380px;
   gap: var(--space-2xl);
   align-items: start;
+}
+
+/* All other sections: single column, centered content */
+.sectionContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
 }
 
 .infoBlock {
@@ -118,10 +126,17 @@
   top: 96px;
 }
 
-/* Map */
+/* Map - full width section, map centered and wide */
 .mapSection {
   padding: var(--space-2xl) 0;
   background: white;
+}
+
+.mapWrap {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
 }
 
 /* Country cards */
@@ -134,7 +149,8 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-text);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  width: 100%;
 }
 
 .cardGrid {
@@ -233,8 +249,8 @@
 }
 
 .toolsSection :global(.region-tools-tab.active) {
-  color: var(--color-primary);
-  border-bottom-color: var(--color-primary);
+  color: #00aeef;
+  border-bottom-color: #00aeef;
 }
 
 .toolsSection :global(.region-tools-desc) {
@@ -246,17 +262,16 @@
 
 .toolsSection :global(.region-tool-cards) {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-lg);
 }
 
 .toolsSection :global(.region-tool-card) {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-md);
-  padding: var(--space-md) var(--space-lg);
-  background: #f8fafb;
+  padding: var(--space-lg);
+  background: white;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   text-decoration: none;
@@ -265,37 +280,62 @@
 }
 
 .toolsSection :global(.region-tool-card:hover) {
-  border-color: #1a9cb0;
-  box-shadow: 0 2px 8px rgba(26, 156, 176, 0.15);
+  border-color: #00aeef;
+  box-shadow: 0 8px 24px rgba(0, 174, 239, 0.12);
+}
+
+.toolsSection :global(.region-tool-icon) {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00aeef 0%, #00d4aa 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.toolsSection :global(.region-tool-card-body) {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .toolsSection :global(.region-tool-name) {
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  color: var(--color-text);
 }
 
-.toolsSection :global(.region-tool-badge) {
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: var(--radius-sm);
+.toolsSection :global(.region-tool-meta),
+.toolsSection :global(.region-tool-countries) {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+}
+
+.toolsSection :global(.region-tool-arrow) {
+  font-size: 1.25rem;
+  color: var(--color-border);
   flex-shrink: 0;
+  transition: transform var(--transition-fast), color var(--transition-fast);
 }
 
-.toolsSection :global(.region-tool-badge.from) {
-  background: #e8f4f8;
-  color: #1a9cb0;
-}
-
-.toolsSection :global(.region-tool-badge.active) {
-  background: #e8f8e8;
-  color: #2d8a3e;
+.toolsSection :global(.region-tool-card:hover .region-tool-arrow) {
+  transform: translateX(4px);
+  color: #00aeef;
 }
 
 .toolsSection :global(.region-tools-empty) {
   font-size: 0.95rem;
   color: var(--color-text-muted);
   font-style: italic;
+  grid-column: 1 / -1;
 }
 
 /* News */
@@ -363,12 +403,16 @@
 }
 
 @media (max-width: 900px) {
-  .container {
+  .heroGrid {
     grid-template-columns: 1fr;
   }
 
   .sidebar {
     position: static;
+  }
+
+  .toolsSection :global(.region-tool-cards) {
+    grid-template-columns: 1fr;
   }
 }
 

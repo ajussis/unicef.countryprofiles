@@ -11,9 +11,11 @@ interface RegionMapProps {
   markers: CountryMapData[]
   title?: string
   subtitle?: string
+  mapHeight?: number
+  wide?: boolean
 }
 
-export default function RegionMap({ center, zoom, markers, title, subtitle }: RegionMapProps) {
+export default function RegionMap({ center, zoom, markers, title, subtitle, mapHeight = 450, wide = false }: RegionMapProps) {
   const [MapComponent, setMapComponent] = useState<React.ComponentType | null>(null)
 
   useEffect(() => {
@@ -28,12 +30,15 @@ export default function RegionMap({ center, zoom, markers, title, subtitle }: Re
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
       })
 
+      const height = mapHeight
+
       const Map = () => (
         <MapContainer
           center={center}
           zoom={zoom}
           scrollWheelZoom={false}
           className={styles.map}
+          style={{ height: `${height}px` }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -82,12 +87,12 @@ export default function RegionMap({ center, zoom, markers, title, subtitle }: Re
     }
 
     loadMap()
-  }, [center, zoom, markers])
+  }, [center, zoom, markers, mapHeight])
 
   if (!MapComponent) {
     return (
-      <div className={styles.mapContainer}>
-        <div className={styles.mapPlaceholder}>
+      <div className={`${styles.mapContainer} ${wide ? styles.mapContainerWide : ''}`}>
+        <div className={styles.mapPlaceholder} style={{ height: `${mapHeight}px` }}>
           <span>Loading map...</span>
         </div>
       </div>
@@ -95,7 +100,7 @@ export default function RegionMap({ center, zoom, markers, title, subtitle }: Re
   }
 
   return (
-    <div className={styles.mapContainer}>
+    <div className={`${styles.mapContainer} ${wide ? styles.mapContainerWide : ''}`}>
       {title && <h2 className={styles.mapTitle}>{title}</h2>}
       {subtitle && <p className={styles.mapSubtitle}>{subtitle}</p>}
       <MapComponent />

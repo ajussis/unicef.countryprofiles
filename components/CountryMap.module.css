@@ -6,6 +6,12 @@
   padding-right: var(--space-lg);
 }
 
+.mapContainerWide {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .mapTitle {
   font-size: 1.5rem;
   font-weight: 700;
@@ -124,7 +130,7 @@
   .map {
     height: 350px;
   }
-  
+
   .mapPlaceholder {
     height: 350px;
   }

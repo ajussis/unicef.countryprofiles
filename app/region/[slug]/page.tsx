@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { getRegionBySlug, getRegionMapData } from '@/lib/regions'
+import { getRegionBySlug, getRegionMapData, getProductsActiveInRegionWithCountries } from '@/lib/regions'
 import { getAllCountries, getCountryFlag } from '@/lib/countries'
 import Chatbot from '@/components/Chatbot'
 import RegionToolsToggle from '@/components/RegionToolsToggle'
@@ -50,7 +50,7 @@ export default function RegionPage({ params }: { params: { slug: string } }) {
 
       {/* Info block + Advisor */}
       <section className={styles.heroSection}>
-        <div className={styles.container}>
+        <div className={styles.heroGrid}>
           <div className={styles.infoBlock}>
             <h2 className={styles.infoTitle}>Regional overview</h2>
             <p className={styles.infoDescription}>{region.description}</p>
@@ -81,20 +81,22 @@ export default function RegionPage({ params }: { params: { slug: string } }) {
 
       {/* Map */}
       <section className={styles.mapSection}>
-        <div className={styles.container}>
+        <div className={styles.mapWrap}>
           <RegionMap
             center={region.mapCenter}
             zoom={region.mapZoom}
             markers={regionMapMarkers}
             title="Countries in this region"
             subtitle="Click a marker for country profile and active EdTech products"
+            mapHeight={520}
+            wide
           />
         </div>
       </section>
 
       {/* Country profile cards */}
       <section className={styles.countriesSection}>
-        <div className={styles.container}>
+        <div className={styles.sectionContainer}>
           <h2 className={styles.sectionTitle}>Country profiles</h2>
           <div className={styles.cardGrid}>
             {countriesInRegion.map((country) => (
@@ -121,18 +123,18 @@ export default function RegionPage({ params }: { params: { slug: string } }) {
 
       {/* Learning Cabinet tools */}
       <section className={styles.toolsSection}>
-        <div className={styles.container}>
+        <div className={styles.sectionContainer}>
           <h2 className={styles.sectionTitle}>Learning Cabinet tools</h2>
           <RegionToolsToggle
             productsFromRegion={region.productsFromRegion}
-            productsActiveInRegion={region.productsActiveInRegion}
+            productsActiveInRegion={getProductsActiveInRegionWithCountries(region)}
           />
         </div>
       </section>
 
       {/* News */}
       <section className={styles.newsSection}>
-        <div className={styles.container}>
+        <div className={styles.sectionContainer}>
           <h2 className={styles.sectionTitle}>News & updates</h2>
           <div className={styles.newsGrid}>
             {region.news.map((item, idx) => (
@@ -154,7 +156,7 @@ export default function RegionPage({ params }: { params: { slug: string } }) {
       </section>
 
       <footer className={styles.footer}>
-        <div className={styles.container}>
+        <div className={styles.sectionContainer}>
           <Link href="/" className={styles.footerBack}>
             ← Back to Country Profiles
           </Link>
