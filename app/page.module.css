@@ -96,12 +96,12 @@
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: var(--space-xl);
-  padding-bottom: var(--space-md);
-  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: var(--space-lg);
+  border-bottom: 3px solid #00aeef;
 }
 
 .continentCount {
@@ -126,10 +126,10 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-md);
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
 }
 
 .regionIcon {
@@ -147,21 +147,47 @@
 }
 
 .regionCta {
-  display: inline-block;
-  margin-bottom: var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #1a9cb0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg) var(--space-xl);
+  background: #1a9cb0;
+  color: white;
   text-decoration: none;
-  border: 1px solid #1a9cb0;
-  border-radius: var(--radius-sm);
-  transition: background var(--transition-fast), color var(--transition-fast);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  box-shadow: 0 4px 16px rgba(26, 156, 176, 0.25);
 }
 
 .regionCta:hover {
-  background: #1a9cb0;
-  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 156, 176, 0.4);
+}
+
+.regionCtaContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.regionCtaTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.regionCtaDesc {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.regionCtaArrow {
+  font-size: 1.75rem;
+  transition: transform var(--transition-base);
+}
+
+.regionCta:hover .regionCtaArrow {
+  transform: translateX(6px);
 }
 
 .grid {

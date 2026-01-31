@@ -14,7 +14,7 @@ export default function CountryMap() {
     const loadMap = async () => {
       const L = await import('leaflet')
       const { MapContainer, TileLayer, Marker, Popup } = await import('react-leaflet')
-      
+
       // Fix for default marker icons in Leaflet with webpack
       delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl
       L.Icon.Default.mergeOptions({
@@ -49,7 +49,7 @@ export default function CountryMap() {
                       <ul className={styles.productList}>
                         {country.products.slice(0, 5).map((product, idx) => (
                           <li key={idx}>
-                            <a 
+                            <a
                               href={`https://www.learningcabinet.org/search/edtech-tools/?search=${encodeURIComponent(product)}`}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -92,7 +92,6 @@ export default function CountryMap() {
 
   return (
     <div className={styles.mapContainer}>
-      <h2 className={styles.mapTitle}>Explore Countries</h2>
       <p className={styles.mapSubtitle}>Click on a marker to view country profile and active EdTech products</p>
       <MapComponent />
     </div>

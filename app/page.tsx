@@ -47,33 +47,16 @@ export default function HomePage() {
   // Sort continents by defined order
   const sortedContinents = continentOrder.filter(c => countriesByContinent[c])
 
-  // Count unique regions
-  const uniqueRegions = new Set(countries.map(c => getCountryRegion(c.name)))
-
   return (
     <main className={styles.main}>
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>Country Profiles</h1>
+          <h1 className={styles.heroTitle}>EdTech Creountry Profiles</h1>
           <p className={styles.heroSubtitle}>
             Comprehensive EdTech suitability and compliance assessments for education systems worldwide.
             Explore regulatory environments, digital policies, and deployment conditions.
           </p>
-          <div className={styles.stats}>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>{countries.length}</span>
-              <span className={styles.statLabel}>Countries</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>{uniqueRegions.size}</span>
-              <span className={styles.statLabel}>Regions</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>13</span>
-              <span className={styles.statLabel}>Assessment Areas</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -112,7 +95,13 @@ export default function HomePage() {
                       </h3>
                       {regionSlug && (
                         <Link href={`/region/${regionSlug}`} className={styles.regionCta}>
-                          Regional EdTech Profile →
+                          <div className={styles.regionCtaContent}>
+                            <span className={styles.regionCtaTitle}>Regional EdTech Profile</span>
+                            <span className={styles.regionCtaDesc}>
+                              Explore {regionName} • {regions[regionName].length} {regions[regionName].length === 1 ? 'country' : 'countries'}
+                            </span>
+                          </div>
+                          <span className={styles.regionCtaArrow}>→</span>
                         </Link>
                       )}
                       <div className={styles.grid}>
