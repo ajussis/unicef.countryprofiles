@@ -311,6 +311,55 @@
   z-index: 10;
 }
 
+.expandButton {
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.expandButton:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Expanded popup overlay */
+.popupOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 2rem;
+}
+
+.popupModal {
+  width: 80vw;
+  height: 80vh;
+  max-width: 1200px;
+  max-height: 900px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.popupModal .inlineMessages {
+  flex: 1;
+  min-height: 200px;
+  max-height: none;
+}
+
 .inlineMessages {
   flex: 1;
   overflow-y: auto;

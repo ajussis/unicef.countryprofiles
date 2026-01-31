@@ -18,6 +18,7 @@ export default function Chatbot({ country = '', region = '', inline = false }: C
   const contextLabel = region || country
   const isRegion = Boolean(region)
   const [isOpen, setIsOpen] = useState(inline) // Always open if inline
+  const [isExpanded, setIsExpanded] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -44,6 +45,20 @@ export default function Chatbot({ country = '', region = '', inline = false }: C
       inputRef.current.focus()
     }
   }, [isOpen, inline])
+
+  useEffect(() => {
+    if (inline && isExpanded) {
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setIsExpanded(false)
+      }
+      document.addEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.removeEventListener('keydown', handleEscape)
+        document.body.style.overflow = ''
+      }
+    }
+  }, [inline, isExpanded])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -160,70 +175,127 @@ export default function Chatbot({ country = '', region = '', inline = false }: C
     }
   }
 
-  // Inline mode - embedded in sidebar
+  // Shared chat content for inline mode (used in both embedded and expanded)
+  const chatContent = (
+    <>
+      <div className={styles.inlineMessages}>
+        {messages.length === 0 && (
+          <div className={styles.inlineWelcome}>
+            <p>
+              {isRegion
+                ? <>Ask anything about EdTech in <strong>{contextLabel}</strong>.</>
+                : <>Ask questions about <strong>{contextLabel}</strong>&apos;s EdTech landscape.</>}
+            </p>
+          </div>
+        )}
+
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`${styles.message} ${styles[message.role]}`}
+          >
+            <div className={styles.messageContent}>
+              {message.content || (
+                <span className={styles.typing}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+              )}
+            </div>
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
+      </div>
+
+      <form className={styles.inlineInputForm} onSubmit={handleSubmit}>
+        <input
+          ref={inputRef}
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ask a question..."
+          disabled={isLoading}
+          className={styles.inlineInput}
+        />
+        <button
+          type="submit"
+          disabled={!input.trim() || isLoading}
+          className={styles.inlineSendButton}
+          aria-label="Send message"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+    </>
+  )
+
+  // Inline mode - embedded in sidebar or expanded popup
   if (inline) {
     return (
-      <div className={styles.inlineContainer}>
-        <div className={styles.inlineHeader}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
-          <span>Your Cabinet Advisor</span>
-        </div>
-
-        <div className={styles.inlineMessages}>
-          {messages.length === 0 && (
-            <div className={styles.inlineWelcome}>
-              <p>
-                {isRegion
-                  ? <>Ask anything about EdTech in <strong>{contextLabel}</strong>.</>
-                  : <>Ask questions about <strong>{contextLabel}</strong>&apos;s EdTech landscape.</>}
-              </p>
+      <>
+        {!isExpanded && (
+          <div className={styles.inlineContainer}>
+            <div className={styles.inlineHeader}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Your Cabinet Advisor</span>
+              <button
+                type="button"
+                className={styles.expandButton}
+                onClick={() => setIsExpanded(true)}
+                aria-label="Expand chat"
+                title="Expand"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
             </div>
-          )}
+            {chatContent}
+          </div>
+        )}
 
-          {messages.map((message, index) => (
+        {/* Expanded popup overlay */}
+        {isExpanded && (
+          <div className={styles.popupOverlay} onClick={() => setIsExpanded(false)}>
             <div
-              key={index}
-              className={`${styles.message} ${styles[message.role]}`}
+              className={styles.popupModal}
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Cabinet Advisor - expanded"
             >
-              <div className={styles.messageContent}>
-                {message.content || (
-                  <span className={styles.typing}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </span>
-                )}
+              <div className={styles.inlineHeader}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Your Cabinet Advisor</span>
+                <button
+                  type="button"
+                  className={styles.expandButton}
+                  onClick={() => setIsExpanded(false)}
+                  aria-label="Close expanded chat"
+                  title="Close"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
               </div>
+              {chatContent}
             </div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
-
-        <form className={styles.inlineInputForm} onSubmit={handleSubmit}>
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask a question..."
-            disabled={isLoading}
-            className={styles.inlineInput}
-          />
-          <button
-            type="submit"
-            disabled={!input.trim() || isLoading}
-            className={styles.inlineSendButton}
-            aria-label="Send message"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="22" y1="2" x2="11" y2="13"></line>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-          </button>
-        </form>
-      </div>
+          </div>
+        )}
+      </>
     )
   }
 
