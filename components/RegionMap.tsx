@@ -23,11 +23,11 @@ export default function RegionMap({ center, zoom, markers, title, subtitle, mapH
       const L = await import('leaflet')
       const { MapContainer, TileLayer, Marker, Popup } = await import('react-leaflet')
 
-      delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl
-      L.Icon.Default.mergeOptions({
-        iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+      const lcBlueMarker = L.divIcon({
+        className: 'lc-marker',
+        html: '<div style="width:16px;height:16px;background:#1a4d6d;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.25);"></div>',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8],
       })
 
       const height = mapHeight
@@ -45,7 +45,7 @@ export default function RegionMap({ center, zoom, markers, title, subtitle, mapH
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {markers.map((country) => (
-            <Marker key={country.slug} position={country.coordinates}>
+            <Marker key={country.slug} position={country.coordinates} icon={lcBlueMarker}>
               <Popup className={styles.popup}>
                 <div className={styles.popupContent}>
                   <h3 className={styles.popupTitle}>{country.name}</h3>

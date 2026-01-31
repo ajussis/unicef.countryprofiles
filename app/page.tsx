@@ -52,7 +52,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>EdTech Creountry Profiles</h1>
+          <h1 className={styles.heroTitle}>EdTech Country Profiles</h1>
           <p className={styles.heroSubtitle}>
             Comprehensive EdTech suitability and compliance assessments for education systems worldwide.
             Explore regulatory environments, digital policies, and deployment conditions.

@@ -92,8 +92,8 @@ export default function CountryMap() {
 
   return (
     <div className={styles.mapContainer}>
-      <p className={styles.mapSubtitle}>Click on a marker to view country profile and active EdTech products</p>
       <MapComponent />
+      <p className={styles.mapSubtitle}>Click on a marker to view country profile and active EdTech products</p>
     </div>
   )
 }

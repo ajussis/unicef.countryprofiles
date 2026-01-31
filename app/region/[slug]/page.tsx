@@ -5,6 +5,7 @@ import { getRegionBySlug, getRegionMapData, getProductsActiveInRegionWithCountri
 import { getAllCountries, getCountryFlag } from '@/lib/countries'
 import Chatbot from '@/components/Chatbot'
 import RegionToolsToggle from '@/components/RegionToolsToggle'
+import RegionOverview from '@/components/RegionOverview'
 import styles from './page.module.css'
 
 const RegionMap = dynamic(() => import('@/components/RegionMap'), { ssr: false })
@@ -52,26 +53,32 @@ export default function RegionPage({ params }: { params: { slug: string } }) {
       <section className={styles.heroSection}>
         <div className={styles.heroGrid}>
           <div className={styles.infoBlock}>
-            <h2 className={styles.infoTitle}>Regional overview</h2>
-            <p className={styles.infoDescription}>{region.description}</p>
-            <div className={styles.metrics}>
-              <div className={styles.metric}>
-                <span className={styles.metricLabel}>Education systems</span>
-                <p className={styles.metricText}>{region.metrics.educationSystem}</p>
-              </div>
-              <div className={styles.metric}>
-                <span className={styles.metricLabel}>Technology</span>
-                <p className={styles.metricText}>{region.metrics.technology}</p>
-              </div>
-              <div className={styles.metric}>
-                <span className={styles.metricLabel}>Internet connectivity</span>
-                <p className={styles.metricText}>{region.metrics.connectivity}</p>
-              </div>
-              <div className={styles.metric}>
-                <span className={styles.metricLabel}>EdTech deployment</span>
-                <p className={styles.metricText}>{region.metrics.edtechDeployment}</p>
-              </div>
-            </div>
+            {region.overview ? (
+              <RegionOverview overview={region.overview} />
+            ) : (
+              <>
+                <h2 className={styles.infoTitle}>Regional overview</h2>
+                <p className={styles.infoDescription}>{region.description}</p>
+                <div className={styles.metrics}>
+                  <div className={styles.metric}>
+                    <span className={styles.metricLabel}>Education systems</span>
+                    <p className={styles.metricText}>{region.metrics.educationSystem}</p>
+                  </div>
+                  <div className={styles.metric}>
+                    <span className={styles.metricLabel}>Technology</span>
+                    <p className={styles.metricText}>{region.metrics.technology}</p>
+                  </div>
+                  <div className={styles.metric}>
+                    <span className={styles.metricLabel}>Internet connectivity</span>
+                    <p className={styles.metricText}>{region.metrics.connectivity}</p>
+                  </div>
+                  <div className={styles.metric}>
+                    <span className={styles.metricLabel}>EdTech deployment</span>
+                    <p className={styles.metricText}>{region.metrics.edtechDeployment}</p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           <aside className={styles.sidebar}>
             <Chatbot region={region.name} inline />

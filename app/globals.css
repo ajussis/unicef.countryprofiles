@@ -226,6 +226,12 @@ a {
   background: var(--color-text-muted);
 }
 
+/* Leaflet custom markers (Learning Cabinet blue) */
+.leaflet-div-icon.lc-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
 /* Leaflet Map Popup Overrides */
 .leaflet-popup-content-wrapper {
   border-radius: 10px;
