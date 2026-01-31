@@ -33,7 +33,7 @@
   align-items: center;
   justify-content: center;
   padding: 2px 8px;
-  background: #00aeef;
+  background: var(--color-primary);
   color: white;
   font-size: 0.65rem;
   font-weight: 700;

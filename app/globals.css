@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 :root {
-  /* UNICEF-inspired color palette with modern twist */
-  --color-primary: #00aeef;
-  --color-primary-dark: #0086b3;
+  /* Learning Cabinet brand colors (from logo) */
+  --color-primary: #1a4d6d;
+  --color-primary-dark: #0d3b66;
   --color-secondary: #ffc20e;
   --color-accent: #e2231a;
 
@@ -18,7 +18,7 @@
   /* Gradients */
   --gradient-hero: linear-gradient(135deg, #0d1b2a 0%, #1b3a5f 50%, #2d5a87 100%);
   --gradient-card: linear-gradient(180deg, rgba(0, 174, 239, 0.03) 0%, transparent 100%);
-  --gradient-accent: linear-gradient(135deg, #00aeef 0%, #00d4aa 100%);
+  --gradient-accent: linear-gradient(135deg, #1a4d6d 0%, #0d3b66 100%);
 
   /* Spacing */
   --space-xs: 0.25rem;

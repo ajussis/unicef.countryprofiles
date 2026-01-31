@@ -249,8 +249,8 @@
 }
 
 .toolsSection :global(.region-tools-tab.active) {
-  color: #00aeef;
-  border-bottom-color: #00aeef;
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
 }
 
 .toolsSection :global(.region-tools-desc) {
@@ -280,7 +280,7 @@
 }
 
 .toolsSection :global(.region-tool-card:hover) {
-  border-color: #00aeef;
+  border-color: var(--color-primary);
   box-shadow: 0 8px 24px rgba(0, 174, 239, 0.12);
 }
 
@@ -288,7 +288,7 @@
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #00aeef 0%, #00d4aa 100%);
+  background: var(--color-primary);
   color: white;
   display: flex;
   align-items: center;
@@ -328,7 +328,7 @@
 
 .toolsSection :global(.region-tool-card:hover .region-tool-arrow) {
   transform: translateX(4px);
-  color: #00aeef;
+  color: var(--color-primary);
 }
 
 .toolsSection :global(.region-tools-empty) {
@@ -393,7 +393,7 @@
 }
 
 .footerBack:hover {
-  color: #1a9cb0;
+  color: var(--color-primary);
 }
 
 .footerCopyright {
